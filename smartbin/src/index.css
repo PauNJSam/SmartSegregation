@@ -1,0 +1,27 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+ */
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Ultra&family=Work+Sans:ital,wght@0,500;1,400&display=swap');
+
+ :root{
+  --_light-yellow: #FFFFE3;
+  --_light-blue: #EAF0F3;
+  --_pure-white: #FFFFFF;
+  --_light-green: #EBEBD0;
+  --_dark-green: #1E411E;
+  --_mid-green: #377935;
+  --_ultra: 'Ultra';
+  --_inter: 'Inter', sans-serif; /* 400 regular, 700 bold */
+
+ }
