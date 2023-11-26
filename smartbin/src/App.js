@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage';
 import Tutorial from './pages/Tutorial';
 import CheckPoints from './pages/CheckPoints';
 import Admin from './pages/Admin';
+import GetPrize from './pages/GetPrize';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       <Route path='tutorial' element={<Tutorial/>}></Route>
       <Route path='checkPoints' element={<CheckPoints/>}></Route>
       <Route path='admin' element={<Admin/>}></Route>
+      <Route path='getPrize/:children' element={<GetPrize />}></Route>
 
     </Route>
   )

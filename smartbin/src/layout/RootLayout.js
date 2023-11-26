@@ -1,5 +1,4 @@
 import { NavLink, Outlet } from "react-router-dom";
-import '../style/RootLayout.css';
 
 const RootLayout = () => {
     return(

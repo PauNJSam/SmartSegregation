@@ -1,4 +1,3 @@
-import '../style/Tutorial.css'
 import Step1Disposal from '../images/Step1Disposal.png';
 import Step2Sensor from '../images/Step2Sensor.png';
 import Step3SwipeCard from '../images/Step3SwipeCard.png';
@@ -13,7 +12,7 @@ const Tutorial = () => {
             <div className='card-container'>
                 <div className='img-container'>
                     <div className='circle'></div>
-                    <img src={Step1Disposal} />
+                    <img src={Step1Disposal} alt='disposal' />
                 </div>
                 <div className='text-container'>
                     <p className='inter-font'>Open the lid and deposit the waste in the bin's main section.</p>
@@ -23,7 +22,7 @@ const Tutorial = () => {
             <div className='card-container'>
                 <div className='img-container'>
                     <div className='circle'></div>
-                    <img src={Step2Sensor} />
+                    <img src={Step2Sensor} alt='sensor'/>
                 </div>
                 <div className='text-container'>
                     <p className='inter-font'>Wait for the bin's sensor detect and sort the waste automatically.</p>
@@ -33,7 +32,7 @@ const Tutorial = () => {
             <div className='card-container'>
                 <div className='img-container'>
                     <div className='circle'></div>
-                    <img src={Step3SwipeCard} />
+                    <img src={Step3SwipeCard} alt='swipe card' />
                 </div>
                 <div className='text-container'>
                     <p className='inter-font'>Swipe your card for automatic points update, as the system detects your use of the smart bin.</p>
@@ -43,7 +42,7 @@ const Tutorial = () => {
             <div className='card-container'>
                 <div className='img-container'>
                     <div className='circle'></div>
-                    <img src={Step4Points} />
+                    <img src={Step4Points}  alt='get points'/>
                 </div>
                 <div className='text-container'>
                     <p className='inter-font'>Check and redeem points via app or designated center</p>
@@ -53,7 +52,7 @@ const Tutorial = () => {
             <div className='card-container'>
                 <div className='img-container'>
                     <div className='circle'></div>
-                    <img src={Step5Reward} />
+                    <img src={Step5Reward} alt='get rewards'/>
                 </div>
                 <div className='text-container'>
                     <p className='inter-font'>Use your card or app to join rewards program.</p>
@@ -63,7 +62,7 @@ const Tutorial = () => {
             <div className='card-container'>
                 <div className='img-container'>
                     <div className='circle'></div>
-                    <img src={Step6Enjoy} />
+                    <img src={Step6Enjoy} alt='enjoy'/>
                 </div>
                 <div className='text-container'>
                     <p className='inter-font'>Enjoy the benefits for your eco-friendly waste disposal.</p>
