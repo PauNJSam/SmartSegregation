@@ -9,6 +9,7 @@ const Admin = () => {
     // const [merchRequestsData, setMerchRequestsData] = useState([]);
     const [merchRequestsData, setMerchRequestsData] = useState([]);
     const [newData, setNewData] = useState([]);
+    // const [userPoints, setUserPoints] = useState(null);
 
     //TODO: add a auth token for refresh or not na lng
 
@@ -86,7 +87,7 @@ const Admin = () => {
                         })
                         // console.log("Req: ",req);
                         setMerchRequestsData(req);
-                        // console.log("merchrequestData: ",merchRequestsData);
+                        console.log("merchrequestData: ",merchRequestsData);
                     }else{
                         console.log("data not found");
                     }
@@ -135,6 +136,65 @@ const Admin = () => {
             points: 123
         })*/
     }; 
+    /* const readPoints = async (userUID) => {
+        
+        try{
+            const pointsRef = ref(db, `${userUID}/`, 'points');
+                onValue(pointsRef, (snapshot) => {
+                    if(snapshot.val()!==null){
+                        const data = snapshot.val();
+                        const thePoints = parseInt(data.points);
+                        console.log(thePoints);
+                        return(thePoints);
+                    }else{
+                        return(null);
+                    }
+                });
+        }catch(err){
+            console.log(err.message);
+        }
+
+    }; */
+    const readPoints = (userUID) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const pointsRef = ref(db, `${userUID}/`, 'points');
+                onValue(pointsRef, (snapshot) => {
+                    if (snapshot.val() !== null) {
+                        const data = snapshot.val();
+                        const thePoints = parseInt(data.points, 10);
+                        console.log(thePoints);
+                        resolve(thePoints);
+                    } else {
+                        resolve(null);
+                    }
+                });
+            } catch (err) {
+                console.log(err.message);
+                reject(err);
+            }
+        });
+    };
+    const confirmRequest = async (userUID, points) => {
+        
+        
+        // console.log("newPoints", newPoints);
+        try{
+            const currentPoints = await readPoints(userUID);
+            if(currentPoints!== null ){
+                const newPoints = currentPoints-points;
+                set(ref(db, `/${userUID}`), {
+                    points: newPoints
+                });
+                alert("User points updated");
+            }
+        } catch(err){
+            console.log(err.message);
+        }
+    };
+    const declineRequest = () => {
+
+    };
 
     return(
         <div className='Admin'>
@@ -157,11 +217,13 @@ const Admin = () => {
                         //TODO: ang data den 2 buttons sell and deny
                         merchRequestsData == null ? null : merchRequestsData.map((request)=>{
                             return(
-                                <article key={crypto.randomUUID()}>
+                                <article key={crypto.randomUUID()} style={{border: '1px solid blue'}}>
                                     {/* <p>safa {request.id}</p> */}
                                     <p>{request.userUID}</p>
                                     <p>{request.merch}</p>
                                     <p>{request.points}</p>
+                                    <button type='button' onClick={()=>confirmRequest(request.userUID, request.points)} >Item Sent</button>
+                                    <button type='button' onClick={()=>declineRequest(request.userUID, request.points)} >Decline Request</button>
                                 </article>
                             )
                         })
