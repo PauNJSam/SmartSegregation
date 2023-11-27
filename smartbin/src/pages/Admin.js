@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { db } from '../config/firebaseConfig';   
-import { set, ref, onValue, remove } from 'firebase/database';
+import { set, ref, onValue, remove, update } from 'firebase/database';
 
 const Admin = () => {
     const loginInputRef = useRef();
@@ -26,55 +26,13 @@ const Admin = () => {
         if(loginInputRef.current.value == "asd"){
             setShowIncorrectPass(false);
             setShowMerchRequests(true);
+            loginInputRef.current.value = '';
         } else {
             setShowIncorrectPass(true);
         }
     };
 
     const readMerchRequests = async () => {
-        
-        /* try{
-            const pointsRef = ref(db, `MERCHREQUEST/`);
-                onValue(pointsRef, (snapshot) => {
-                    if(snapshot.val()!==null){
-                        const data = snapshot.val();
-                        if(data!=null){
-                            Object.values(data).map((request)=>{
-                                setMerchRequestsData((oldArray)=>[...oldArray,request]);
-                                console.log(merchRequestsData);
-                            })
-                        }
-                    }else{
-                        console.log("data not found");
-                    }
-                });
-                console.log("usessss");
-
-        }catch(err){
-            console.log(err.message);
-        } */
-
-       /*  try{
-            const pointsRef = ref(db, `MERCHREQUEST/`);
-                onValue(pointsRef, (snapshot) => {
-                    if(snapshot.val()!==null){
-                        const data = snapshot.val();
-                        if(data!=null){
-                            setMerchRequestsData(Object.values(data));
-                            console.log(merchRequestsData);
-                            setMerchRequestsData(data);
-                            console.log(merchRequestsData);
-                        }
-                    }else{
-                        console.log("data not found");
-                    }
-                });
-                console.log("usessss");
-
-        }catch(err){
-            console.log(err.message);
-        } */
-
 
         try{
             const pointsRef = ref(db, `MERCHREQUEST/`);
@@ -82,10 +40,12 @@ const Admin = () => {
                     if(snapshot.val()!==null){
                         var req = [];
                         snapshot.forEach(childSnapshot => {
-                            req.push(childSnapshot.val());
-                            // console.log("child: ", childSnapshot.val());
+                            const key = childSnapshot.key; // Retrieve the object key
+                            const data = { key, ...childSnapshot.val() }; // Include key in the data
+                            req.push(data);
+                            
                         })
-                        // console.log("Req: ",req);
+                        
                         setMerchRequestsData(req);
                         console.log("merchrequestData: ",merchRequestsData);
                     }else{
@@ -99,62 +59,8 @@ const Admin = () => {
         }
 
 
-        /* try{
-            const pointsRef = ref(db, `MERCHREQUEST/`);
-                onValue(pointsRef, (snapshot) => {
-                    if(snapshot.val()!==null){
-                        console.log("snapshotVal: ", snapshot.val());
-                        snapshot.forEach(childSnapshot => {
-                            setNewData((old)=>[...old, childSnapshot.val()]);
-                            console.log("child: ", childSnapshot.val());
-                            console.log('merchData', merchRequestsData);
-                        })
-                        newData.forEach(element=>{
-                            makeData(element.userUID, element.merch, element.points);
-                            console.log("New Data",element);
-                        });
-                        
-                    }else{
-                        console.log("data not found");
-                    }
-                });
-                console.log("usessss");
-
-        }catch(err){
-            console.log(err.message);
-        } */
-
     };
-    /* const makeData = ({userUID, merch, points}) => {
-        setMerchRequestsData((e)=>[...e, {userUID, merch, points}]);
-    }; */
-
-    const write = () => {
-    /*     const uuid = 'USERS';
-        set(ref(db, `/${uuid}`), {
-            studentId: userUIDRef.current.value,
-            points: 123
-        })*/
-    }; 
-    /* const readPoints = async (userUID) => {
-        
-        try{
-            const pointsRef = ref(db, `${userUID}/`, 'points');
-                onValue(pointsRef, (snapshot) => {
-                    if(snapshot.val()!==null){
-                        const data = snapshot.val();
-                        const thePoints = parseInt(data.points);
-                        console.log(thePoints);
-                        return(thePoints);
-                    }else{
-                        return(null);
-                    }
-                });
-        }catch(err){
-            console.log(err.message);
-        }
-
-    }; */
+    
     const readPoints = (userUID) => {
         return new Promise((resolve, reject) => {
             try {
@@ -175,7 +81,7 @@ const Admin = () => {
             }
         });
     };
-    const confirmRequest = async (userUID, points) => {
+    const confirmRequest = async (userUID, points, theKey) => {
         
         
         // console.log("newPoints", newPoints);
@@ -183,23 +89,36 @@ const Admin = () => {
             const currentPoints = await readPoints(userUID);
             if(currentPoints!== null ){
                 const newPoints = currentPoints-points;
-                set(ref(db, `/${userUID}`), {
+                update(ref(db, `/${userUID}`), {
                     points: newPoints
                 });
+                console.log("UserPoints updated");
+                remove(ref(db, 'MERCHREQUEST' +`/${theKey}`));
+                console.log("Merch Request Removed");
                 alert("User points updated");
             }
         } catch(err){
             console.log(err.message);
         }
     };
-    const declineRequest = () => {
-
+    const declineRequest = (theKey) => {
+        try{
+            remove(ref(db, 'MERCHREQUEST/' +`${theKey}`));
+            alert('Request Removed');
+        } catch(err){
+            console.log(err.message);
+        }
+        
     };
+
+    const logOut = () => {
+        setShowMerchRequests(false);
+    }
 
     return(
         <div className='Admin'>
             <div>
-                <button type='button'>Back</button>
+                <button type='button' onClick={logOut}>Log out</button>
                 <p>Admin</p>
             </div>
             <input ref={loginInputRef} type='password' placeholder='Enter password' />
@@ -218,12 +137,12 @@ const Admin = () => {
                         merchRequestsData == null ? null : merchRequestsData.map((request)=>{
                             return(
                                 <article key={crypto.randomUUID()} style={{border: '1px solid blue'}}>
-                                    {/* <p>safa {request.id}</p> */}
+                                    <p>key: {request.key}</p>
                                     <p>{request.userUID}</p>
                                     <p>{request.merch}</p>
                                     <p>{request.points}</p>
-                                    <button type='button' onClick={()=>confirmRequest(request.userUID, request.points)} >Item Sent</button>
-                                    <button type='button' onClick={()=>declineRequest(request.userUID, request.points)} >Decline Request</button>
+                                    <button type='button' onClick={()=>confirmRequest(request.userUID, request.points, request.key)} >Item Sent</button>
+                                    <button type='button' onClick={()=>declineRequest(request.key)} >Decline Request</button>
                                 </article>
                             )
                         })
