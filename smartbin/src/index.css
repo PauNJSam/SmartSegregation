@@ -23,11 +23,18 @@ code {
   --_mid-green: #377935;
   --_ultra: 'Ultra';
   --_inter: 'Inter', sans-serif; /* 400 regular, 700 bold */
-
+  --_box-shadow: 0px 6px 4px 4px rgba(0, 0, 0, 0.20);
  }
  /* Root Layout */
+ *{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+ }
  main{
-  background: var(--_light);
+  background: var(--_light-yellow);
+  min-height: 100vh;
+  padding: 1rem 1.5rem;
 }
 
 
@@ -38,20 +45,149 @@ code {
 /* Tutorial Page */
  .Tutorial{
   background: var(--_light-green);
+  padding-top: 1rem;
+  border-radius: 1rem;
+  padding-bottom: 2rem;
 }
 .Tutorial .header-text{
   color: var(--_dark-green);
   font-family: var(--_ultra);
+  text-align: center;
+  margin-top: 1rem;
 }
 .Tutorial .card-container{
-  background: var(--_pure-white);
+  margin: 1rem auto;
+  width: 250px;
+  box-shadow: var(--_box-shadow);
+  padding-bottom: 0.5rem;
+  border-radius: 10px;
+  
 }
 .Tutorial .img-container{
   background: var(--_light-blue);
+  text-align: center;
+  border-radius: 10px 10px 0 0;
 }
-/* .Tutorial .text-container{
-  font-family: var(--_inter);
-} */
+.Tutorial .text-container{
+  /* font-family: var(--_inter); */
+  margin: 0 1rem;
+}
 .Tutorial .inter-font{
   font-family: var(--_inter);
+}
+
+.RootLayout{
+  background-color: var(--_light-yellow);
+}
+.RootLayout .navs{
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.page-label{
+  color: var(--_dark-green);
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+
+}
+.center-div{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.center-item{
+  text-align: center;
+}
+.center-dis{
+  margin: 0 auto;
+}
+.input-btn{
+  width: 200px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+.btn{
+  background: var(--_mid-green);
+  border-radius: 1rem;
+  color: var(--_pure-white);
+  padding: 8px 1rem;
+  border: none;
+  display: block;
+  width: 100px;
+}
+.btn-decide{
+  border: none;
+  padding: 0.5rem 1rem;
+  background: var(--_mid-green);
+  border-radius: 0.3rem;
+  color: var(--_pure-white);
+  padding: 8px 1rem;
+  border: none;
+  width: 100px;
+  margin-right: 0.5rem;
+}
+.btn-decline{
+  background: #9a3b2c;
+}
+.hori-scroll{
+  display: flex;
+  flex-direction: row;
+  gap: 0.7rem;
+  overflow-x: auto;
+}
+.hori-scroll::-webkit-scrollbar{
+  background: none;
+}
+.CheckPoints{
+  background-color: var(--_light-yellow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.margin-container{
+  margin-top: 1rem;
+}
+.list-container{
+  box-shadow: var(--_box-shadow);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: #fbfbfb;
+  display: flex;
+  flex-direction: row;
+  /* gap: 0.8rem; */
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.merch-list-text p{
+  margin-bottom: 0.5rem;
+}
+.Admin{
+  margin-top: 2rem;
+}
+.GetPrize{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.getpoints-center p{
+  margin: 0 auto;
+  text-align: center;
+}
+.getpoints-center div{
+  margin: 0 auto;
+  text-align: center;
+}
+.landingPage{
+  margin-top: 3rem;  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }

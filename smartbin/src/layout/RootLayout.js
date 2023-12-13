@@ -1,15 +1,16 @@
 import { NavLink, Outlet } from "react-router-dom";
+import logo from "../images/logo.png";
 
 const RootLayout = () => {
     return(
         <main>
-            <div>
-                <p>Logo Here</p>
-                <div>
-                    <NavLink to='/'>Home</NavLink>
-                    <NavLink to='/checkPoints'>Points</NavLink>
-                    <NavLink to='/tutorial'>Tutorial</NavLink>
-                    <NavLink to='/admin'>Admin</NavLink>
+            <div className="RootLayout">
+                <img src={logo} width="50px"/>
+                <div className="navs">
+                    <div className="nav-element"><NavLink to='/'>Home</NavLink></div>
+                    <div className="nav-element"><NavLink to='/checkPoints'>Points</NavLink></div>
+                    <div className="nav-element"><NavLink to='/tutorial'>Tutorial</NavLink></div>
+                    <div className="nav-element"><NavLink to='/admin'>Admin</NavLink></div>
                 </div>
             </div>
             <Outlet/>

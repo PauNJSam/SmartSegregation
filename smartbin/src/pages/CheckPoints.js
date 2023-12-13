@@ -55,40 +55,42 @@ const CheckPoints = () => {
 
     return(
         <div className='CheckPoints'>
-            <p>The Check How Much Points You Earned!</p>
-            <input type='text' ref={userUIDRef} />
-            <button type="button" onClick={readPoints}>Check</button>
-            <div>
-                <p>You have a total of</p>
-                {
-                    userPoints == null ? null : <p>{userPoints}</p>
-                }
-                {
-                    warning && <p>warning</p>
-                }
-                <p>points</p>
+            <div className='center-div'>
+                <p className='page-label'>The Check How Much Points You Earned!</p>
+                <input className='center-item input-btn' type='text' ref={userUIDRef} />
+                <button className='btn center-item input-btn' type="button" onClick={readPoints}>Check</button>
             </div>
-            <div>
-                <p>Prizes to collect</p>
-                <section>
-                    <article>
-                        <img src={bag} alt='bag' onClick={()=>{getPrize(80)}} />
+            <div className='margin-container'>
+                <p className='small-label center-item'>You have a total of</p>
+                {
+                    userPoints == null ? <p className='center-item'>###</p> : <p className='points center-item'>{userPoints}</p>
+                }
+                {
+                    warning && <p className='warning center-item'>warning</p>
+                }
+                <p className='small-label center-item'>points</p>
+            </div>
+            <div className='margin-container'>
+                <p className='page-label'>Prizes to collect</p>
+                <section className='hori-scroll'>
+                    <article className='merch-container'>
+                        <img className='merch' src={bag} alt='bag' onClick={()=>{getPrize(80)}} style={{width:'110px'}}/>
                         <p>80 points</p>
                     </article>
-                    <article>
-                        <img src={cup} alt='cup' onClick={()=>{getPrize(50)}}  />
+                    <article className='merch-container'>
+                        <img className='merch' src={cup} alt='cup' onClick={()=>{getPrize(50)}}  />
                         <p>50 points</p>
                     </article>
-                    <article>
-                        <img src={toothbrush} alt='toothbrush' onClick={()=>{getPrize(40)}}  />
+                    <article className='merch-container'>
+                        <img className='merch' src={toothbrush} alt='toothbrush' onClick={()=>{getPrize(40)}}  />
                         <p>40 points</p>
                     </article>
-                    <article>
-                        <img src={utensils} alt='utensils' onClick={()=>{getPrize(60)}}  />
+                    <article className='merch-container'>
+                        <img className='merch' src={utensils} alt='utensils' onClick={()=>{getPrize(60)}}  />
                         <p>60 points</p>
                     </article>
-                    <article>
-                        <img src={pens} alt='pens' onClick={()=>{getPrize(100)}}  />
+                    <article className='merch-container'>
+                        <img className='merch' src={pens} alt='pens' onClick={()=>{getPrize(100)}}  />
                         <p>100 points</p>
                     </article>
                 </section>

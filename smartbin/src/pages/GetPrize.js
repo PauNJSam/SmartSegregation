@@ -63,12 +63,12 @@ const GetPrize = () => {
     
 
     return(
-        <section className="GetPrize">
+        <section className="GetPrize center-dis">
             <div>
-                <button type="button" onClick={goBackToPointsPage}>Back</button>
+                <button className="btn" type="button" onClick={goBackToPointsPage}>Back</button>
             </div>
-            <div>
-                <p>Merch Selected:</p>
+            <div className="center-dis getpoints-center">
+                <p className="page-label">Merch Selected:</p>
                 <div>
                     {merchImage && <img src={merchImage} alt="merch"/>}
                 </div>
@@ -77,14 +77,15 @@ const GetPrize = () => {
                 <p>{merchPoints}</p>
                 <p>Points</p>
             </div>
-            <div>
-                <p>To get merch</p>
-                <input ref={userUIDRef} type="text" placeholder="Enter RFID UUID" />
-                <button type="button" onClick={confirmMerch}>Enter</button>
+            <div className="center-div">
+                <p className="page-label">To get merch</p>
+                <input className="input-btn center-dis" ref={userUIDRef} type="text" placeholder="Enter RFID UUID" />
+                <button className="btn center-dis" type="button" onClick={confirmMerch}>Enter</button>
             </div>
             <div>
                 <p>Instructions:</p>
-                <p>Lorem Ipsum akjdnfa sdfa jnow jnan  yhyhdf nina</p>
+                <br></br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar mattis nunc sed blandit libero volutpat. Tempus iaculis urna id volutpat lacus laoreet. Ac odio tempor orci dapibus ultrices. Et sollicitudin ac orci phasellus egestas tellus rutrum tellus. In ante metus dictum at. Varius sit amet mattis vulputate. Amet purus gravida quis blandit. Odio aenean sed adipiscing diam donec adipiscing tristique. Nullam eget felis eget nunc lobortis. Placerat orci nulla pellentesque dignissim. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan.</p>
             </div>
         </section>
     );
